@@ -1,0 +1,15 @@
+{
+  "name": "delivery-rabbitmq",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:DarkCleopas/delivery-rabbitmq.git",
+  "author": "luccle <lcleopark99@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "amqplib": "^0.8.0",
+    "dotenv": "^12.0.3"
+  }
+}
