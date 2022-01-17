@@ -21,8 +21,8 @@
   * [Instalando dependências](#construction-instalando-dependencias)
   * [Rodando o Projeto](#arrow_forward-rodando-o-projeto)
   * [RabbitMQ](#arrow_forward-rabbitmq)
-  * [Deploy](#arrow_forward-deploy)
 * [Documentação](#bookmark_tabs-documentacao)
+* [Deploy](#arrow_forward-deploy)
 * [Licença](#page_facing_up-licença)
 * [Autores](#woman_technologist-man_technologist-autores)
 
@@ -77,6 +77,29 @@ $ yarn start
 ```
 
 A aplicação funcionará em `http://localhost:4000`.
+
+### :arrow_forward: RabbitMQ
+
+Para ativar o broker RabbitMQ, rode esse comando docker `docker run -d -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management`. Após isso, rode o arquivo `subscriber.js`. 
+A cada finalização de pedido feita (`/finish_orders`), será mostrado uma nova atualização no subscriber (além dos pedidos feitos anteriormente), assim:
+```bash
+Conectado ao broker RabbitMQ
+ [*] Esperando por pedidos em delivery-rabbitmq.
+Um novo pedido apareceu!
+{
+  orders: [
+    {
+      productId: 2,
+      productName: 'Café',
+      productPrice: 14.9,
+      productAmount: 3,
+      orderValue: 44.7
+    }
+  ],
+  ordersValue: 44.7,
+  address: 'Rua das Mangas Azedas'
+}
+```
 
 ## :bookmark_tabs: Documentação
 
@@ -220,31 +243,8 @@ A aplicação funcionará em `http://localhost:4000`.
 
   E retorna status 200.
 
-### 🚧 RabbitMQ
 
-Para testar o RabbitMQ, rode esse comando docker `docker run -d -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management`. Após isso, rode o arquivo `subscriber.js`. 
-A cada finalização de pedido feita (`/finish_orders`), será mostrado uma nova atualização no subscriber (além dos pedidos feitos anteriormente), assim:
-```bash
-Conectado ao broker RabbitMQ
- [*] Esperando por pedidos em delivery-rabbitmq.
-Um novo pedido apareceu!
-{
-  orders: [
-    {
-      productId: 2,
-      productName: 'Café',
-      productPrice: 14.9,
-      productAmount: 3,
-      orderValue: 44.7
-    }
-  ],
-  ordersValue: 44.7,
-  address: 'Rua das Mangas Azedas'
-}
-```
-
-
-### 🚧 Deploy
+## ▶️ Deploy
 
 Foi feito o deploy deste projeto no Heroku. Você pode usar essa url `https://darkcleopas-delivery-rabbitmq.herokuapp.com/` para realizar os testes sem precisar rodar a api principal. Porém, não foi possível rodar uma instância do RabbitMQ no deploy, então não será possível finalizar o pedido com `/finish_orders`, apenas as outras rotas.
 
