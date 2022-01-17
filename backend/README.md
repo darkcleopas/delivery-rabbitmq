@@ -20,6 +20,8 @@
   * [Pré-requisitos](#construction-pre-requisitos)
   * [Instalando dependências](#construction-instalando-dependencias)
   * [Rodando o Projeto](#arrow_forward-rodando-o-projeto)
+  * [RabbitMQ](#arrow_forward-rabbitmq)
+  * [Deploy](#arrow_forward-deploy)
 * [Documentação](#bookmark_tabs-documentacao)
 * [Licença](#page_facing_up-licença)
 * [Autores](#woman_technologist-man_technologist-autores)
