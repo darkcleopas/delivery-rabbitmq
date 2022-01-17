@@ -43,14 +43,15 @@ Este projeto usa [Node.js](https://nodejs.org/en/) e[Yarn](https://yarnpkg.com),
 Clone este repositório:
 ```bash
 
-$ git clone https://github.com/DarkCleopas/delivery-mqtt.git
+$ git clone https://github.com/DarkCleopas/delivery-rabbitmq.git
 
-# Entre na pasta `delivery-rest/backend`:
+# Entre na pasta `delivery-rabbitmq/backend`:
 
-$ cd delivery-rest/backend
+$ cd delivery-rabbitmq/backend
 ```
 
 🚨 Se você não possui git instalado em sua máquina, você pode instalá-lo [aqui](https://git-scm.com/downloads).
+🚨 Se você não possui docker instalado em sua máquina, você pode instalá-lo [aqui](https://docs.docker.com/engine/install/).
 
 
 ### :construction: Instalando dependências
@@ -69,13 +70,12 @@ Rode os seguintes comando:
 
 # Para o servidor
 
-$ yarn server
+$ yarn start
 
 ```
 
 A aplicação funcionará em `http://localhost:4000`.
 
-Podendo ser visto em deploy no seguinte link: [https://market-sd.herokuapp.com](https://market-sd.herokuapp.com).
 ## :bookmark_tabs: Documentação
 
 - Listar produtos
@@ -218,38 +218,16 @@ Podendo ser visto em deploy no seguinte link: [https://market-sd.herokuapp.com](
 
   E retorna status 200.
 
-### 🚧 Deploy
+### 🚧 RabbitMQ
 
-Foi feito o deploy deste projeto no Heroku. Você pode usar essa url `https://darkcleopas-delivery-mqtt.herokuapp.com/` para realizar os testes sem precisar rodar a api principal. 
-
-Para testar o MQTT, rode o arquivo `subscriber.js`. A cada finalização de pedido feita (`/finish_orders`), será mostrado uma nova atualização no subscriber (além dos pedidos feitos anteriormente), assim:
-
+Para testar o RabbitMQ, rode esse comando docker `docker run -d -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management`. Após isso, rode o arquivo `subscriber.js`. 
+A cada finalização de pedido feita (`/finish_orders`), será mostrado uma nova atualização no subscriber (além dos pedidos feitos anteriormente), assim:
 ```bash
-Conectado ao broker MQTT
+Conectado ao broker RabbitMQ
+ [*] Esperando por pedidos em delivery-rabbitmq.
 Um novo pedido apareceu!
 {
   orders: [
-    {
-      productId: 3,
-      productName: 'Nikito',
-      productPrice: 2,
-      productAmount: 1,
-      orderValue: 2
-    }
-  ],
-  ordersValue: 2,
-  address: 'Ceilandia, em frente ao lote 14'
-}
-Um novo pedido apareceu!
-{
-  orders: [
-    {
-      productId: 1,
-      productName: 'Água',
-      productPrice: 1.9,
-      productAmount: 1,
-      orderValue: 1.9
-    },
     {
       productId: 2,
       productName: 'Café',
@@ -258,14 +236,20 @@ Um novo pedido apareceu!
       orderValue: 44.7
     }
   ],
-  ordersValue: 46.6,
+  ordersValue: 44.7,
   address: 'Rua das Mangas Azedas'
 }
 ```
 
+
+### 🚧 Deploy
+
+Foi feito o deploy deste projeto no Heroku. Você pode usar essa url `https://darkcleopas-delivery-rabbitmq.herokuapp.com/` para realizar os testes sem precisar rodar a api principal. Porém, não foi possível rodar uma instância do RabbitMQ no deploy, então não será possível finalizar o pedido com `/finish_orders`, apenas as outras rotas.
+
+
 ## :page_facing_up: Licença
 
-Este projeto usa a licença [MIT](https://github.com/3salles/user-crud/blob/main/LICENSE).
+Este projeto usa a licença [MIT](https://github.com/DarkCleopas/user-crud/blob/main/LICENSE).
 
 ## :woman_technologist: :man_technologist: Autores
 
